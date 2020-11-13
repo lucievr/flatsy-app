@@ -1,0 +1,12 @@
+{
+  "name": "flatsy",
+  "displayName": "flatsy",
+  "expo": {
+    "name": "flatsy",
+    "slug": "flatsy",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
