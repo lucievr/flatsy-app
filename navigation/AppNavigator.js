@@ -7,16 +7,18 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import Colours from '../constants/Colours';
+import HomeScreen from '../screens/HomeScreen';
+
 const Root = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontFamily: 'quicksand-semibold' }}>Flatsy</Text>
-      <Button title='See flats' onPress={() => navigation.navigate('Flats')} />
-    </View>
-  );
+const defaultNavOptions = {
+  headerTitleStyle: {
+    fontFamily: 'quicksand'
+  },
+  headerTintColor: Colours.primary,
+  headerTitleAlign: 'center'
 };
 
 const FlatsScreen = ({ navigation }) => {
@@ -96,10 +98,10 @@ const AppNavigator = () => {
         };
     }
   };
-  
+
   return (
     <NavigationContainer>
-      <Root.Navigator>
+      <Root.Navigator screenOptions={defaultNavOptions}>
         <Root.Screen
           name='Home'
           component={HomeTabs}
