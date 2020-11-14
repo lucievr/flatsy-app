@@ -8,6 +8,7 @@ const fetchFonts = () => {
   return Font.loadAsync({
     'quicksand': require('./assets/fonts/Quicksand-Regular.ttf'),
     'quicksand-semibold': require('./assets/fonts/Quicksand-SemiBold.ttf'),
+    'quicksand-bold': require('./assets/fonts/Quicksand-Bold.ttf'),
   });
 };
 

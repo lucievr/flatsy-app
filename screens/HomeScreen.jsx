@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import HomeIcon from '../assets/images/HomeIcon';
-import Colours from '../constants/Colours';
+import Colours from '../constants/colours';
+import DefaultText from '../components/DefaultText';
+import CustomButton from '../components/CustomButton';
 
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Flatsy</Text>
       <HomeIcon />
-      <Text>Find your perfect home with us!</Text>
-      <Button style={styles.button} color={Colours.accent} title='View properties' onPress={() => navigation.navigate('Flats')} />
+      <DefaultText>Find your perfect home with us!</DefaultText>
+      <CustomButton onPress={() => navigation.navigate('Flats')}>View properties</CustomButton>
     </View>
   );
 };
@@ -18,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: { 
     flex: 1, 
-    justifyContent: 'center', 
+    justifyContent: 'space-evenly', 
     alignItems: 'center',
   },
   title: {
@@ -27,12 +29,6 @@ const styles = StyleSheet.create({
     color: Colours.primary,
     margin: 20
   },
-  // fix button, styles not applied, CustomButton + CustomText and apply fontFamily
-  button: {
-    margin: 50,
-    borderRadius: 30,
-    padding: 20,
-  }
 });
 
 export default HomeScreen;

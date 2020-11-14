@@ -6,7 +6,7 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Colours from '../constants/Colours';
+import Colours from '../constants/colours';
 import HomeScreen from '../screens/HomeScreen';
 import FlatsScreen from '../screens/FlatsScreen';
 import FlatDetailScreen from '../screens/FlatDetailScreen';

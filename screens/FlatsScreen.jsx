@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import CustomButton from '../components/CustomButton';
 
 const FlatsScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <Text>Flats Screen</Text>
-      <Button
-        title='See flat detail'
-        onPress={() => navigation.navigate('Detail')}
-      />
+      <CustomButton onPress={() => navigation.navigate('Detail')}>
+        See flat detail
+      </CustomButton>
     </View>
   );
 };
