@@ -7,11 +7,11 @@ import AppNavigator from './navigation/AppNavigator';
 const fetchFonts = () => {
   return Font.loadAsync({
     'quicksand': require('./assets/fonts/Quicksand-Regular.ttf'),
-    'quicksand-semibold': require('./assets/fonts/Quicksand-SemiBold.ttf')
+    'quicksand-semibold': require('./assets/fonts/Quicksand-SemiBold.ttf'),
   });
 };
 
-export default function App() {
+const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
   if (!fontLoaded) {
     return (
@@ -23,7 +23,7 @@ export default function App() {
       />
     );
   }
-  return (
-    <AppNavigator />
-  );
-}
+  return <AppNavigator />;
+};
+
+export default App;

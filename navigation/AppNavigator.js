@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
@@ -9,80 +8,34 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Colours from '../constants/Colours';
 import HomeScreen from '../screens/HomeScreen';
+import FlatsScreen from '../screens/FlatsScreen';
+import FlatDetailScreen from '../screens/FlatDetailScreen';
+import ContactScreen from '../screens/ContactScreen';
+import AccountScreen from '../screens/AccountScreen';
 
 const Root = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const defaultNavOptions = {
   headerTitleStyle: {
-    fontFamily: 'quicksand'
+    fontFamily: 'quicksand',
   },
   headerTintColor: Colours.primary,
-  headerTitleAlign: 'center'
+  headerTitleAlign: 'center',
 };
 
-const FlatsScreen = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Flats Screen</Text>
-      <Button
-        title='See flat detail'
-        onPress={() => navigation.navigate('Detail')}
-      />
-    </View>
-  );
-};
-
-function AccountScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Account Screen</Text>
-    </View>
-  );
-}
-
-const FlatDetailScreen = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Flat Detail Screen</Text>
-      <Button
-        title='Contact now!'
-        onPress={() => navigation.navigate('Contact')}
-      />
-    </View>
-  );
-};
-
-function ContactScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Contact Screen</Text>
-    </View>
-  );
-}
-
-function HomeTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name='Home' component={HomeScreen} />
-      <Tab.Screen
-        name='Flats'
-        component={FlatsScreen}
-        options={{ headerTitle: 'Flats' }}
-      />
-      <Tab.Screen
-        name='Account'
-        component={AccountScreen}
-        options={{ headerTitle: 'Account' }}
-      />
-    </Tab.Navigator>
-  );
-}
+const HomeTabs = () => (
+  <Tab.Navigator>
+    <Tab.Screen name='Home' component={HomeScreen} />
+    <Tab.Screen name='Flats' component={FlatsScreen} />
+    <Tab.Screen name='Account' component={AccountScreen} />
+  </Tab.Navigator>
+);
 
 const AppNavigator = () => {
   const getHeaderTitle = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
-  
+
     switch (routeName) {
       case 'Home':
         return {
@@ -110,7 +63,7 @@ const AppNavigator = () => {
         <Root.Screen
           name='Detail'
           component={FlatDetailScreen}
-          options={{ title: 'Flat detail' }}
+          options={{ headerTitle: 'Flat detail' }}
         />
         <Root.Screen name='Contact' component={ContactScreen} />
       </Root.Navigator>
