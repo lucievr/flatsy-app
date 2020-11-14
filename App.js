@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+
+import AppNavigator from './navigation/AppNavigator';
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'quicksand': require('./assets/fonts/Quicksand-Regular.ttf'),
+    'quicksand-semibold': require('./assets/fonts/Quicksand-SemiBold.ttf')
+  });
+};
 
 export default function App() {
+  const [fontLoaded, setFontLoaded] = useState(false);
+  if (!fontLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => {
+          setFontLoaded(true);
+        }}
+      />
+    );
+  }
   return (
-    <View style={styles.container}>
-      <Text>Flatsy</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppNavigator />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
