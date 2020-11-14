@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     borderRadius: 45,
     overflow: 'hidden',
-    width: '90%',
+    width: '80%',
     maxWidth: 400
   },
   button: {
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 15,
     borderRadius: 45,
-    margin: 20,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -49,7 +48,6 @@ const styles = StyleSheet.create({
     color: Colours.primary,
     fontFamily: 'quicksand-semibold',
     fontSize: 22,
-    // textTransform: 'uppercase',
   },
 });
 

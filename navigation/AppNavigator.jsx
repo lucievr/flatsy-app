@@ -43,8 +43,8 @@ const HomeTabs = () => (
       },
     })}
     tabBarOptions={{
-      activeTintColor: Colours.accent,
-      inactiveTintColor: 'gray',
+      activeTintColor: Colours.darkAccent,
+      inactiveTintColor: 'grey',
       labelStyle: {
         fontSize: 15,
         marginBottom: 5

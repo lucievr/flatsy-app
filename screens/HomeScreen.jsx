@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'quicksand-semibold',
-    fontSize: 36,
+    fontSize: 46,
     color: Colours.primary,
   },
   subtitle: {
