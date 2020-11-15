@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Platform } from 'react-native';
+import { View, Image, StyleSheet, Platform, Text } from 'react-native';
 import {
   State,
   TapGestureHandler,
@@ -11,9 +11,7 @@ import ViewPager from '@react-native-community/viewpager';
 import DefaultText from './DefaultText';
 
 const FlatItem = ({
-  image,
-  image2,
-  image3,
+  images,
   price,
   roomNr,
   address,
@@ -42,23 +40,18 @@ const FlatItem = ({
               initialPage={0}
               orientation='horizontal'
             >
-              <View style={styles.imageContainer} key='1'>
-                <TapGestureHandler onHandlerStateChange={onSingleTap}>
-                  <Image style={styles.image} source={{ uri: image }} />
-                </TapGestureHandler>
-              </View>
-              <View style={styles.imageContainer} key='2'>
-                <TapGestureHandler onHandlerStateChange={onSingleTap}>
-                  <Image style={styles.image} source={{ uri: image2 }} />
-                </TapGestureHandler>
-              </View>
-              <View style={styles.imageContainer} key='3'>
-                <TapGestureHandler onHandlerStateChange={onSingleTap}>
-                  <Image style={styles.image} source={{ uri: image3 }} />
-                </TapGestureHandler>
-              </View>
+              {images.map((imgUrl, index) => (
+                <View style={styles.imageContainer} key={index}>
+                  <TapGestureHandler onHandlerStateChange={onSingleTap}>
+                  <View>
+                    <Image style={styles.image} source={{ uri: imgUrl }} />
+                    <Text style={styles.imgCount}>{index + 1}/{images.length}</Text>
+                    </View>
+                  </TapGestureHandler>
+                </View>
+              ))}
             </ViewPager>
-            <View>
+            <View style={styles.flatInfo}>
               <DefaultText>{price} €/month</DefaultText>
               <DefaultText>{roomNr} bedroom flat</DefaultText>
               <DefaultText>{address}</DefaultText>
@@ -96,6 +89,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  imgCount: {
+    position: 'absolute',
+    bottom: 8,
+    right: 8,
+    backgroundColor: 'rgba(64,64,64,0.8)',
+    color: 'white',
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    fontSize: 18,
+    fontFamily: 'quicksand-semibold',
+    borderRadius: 10
+  },
+  flatInfo: {
+    padding: 10
+  }
 });
 
 export default FlatItem;
