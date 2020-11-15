@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import CustomButton from '../components/CustomButton';
 import DefaultText from '../components/DefaultText';
 import FlatItem from '../components/FlatItem';
+import ListHeader from '../components/ListHeader';
 
 const flats = [
   {
@@ -38,7 +39,6 @@ const flats = [
 const FlatsScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
-      <DefaultText>Results: 34</DefaultText>
       {/* <CustomButton onPress={() => navigation.navigate('Detail')}>
         See flat detail
       </CustomButton> */}
@@ -54,6 +54,7 @@ const FlatsScreen = ({ navigation }) => {
             dateAdded={item.dateAdded}
           />
         )}
+        ListHeaderComponent={() => <ListHeader />}
       />
     </View>
   );
