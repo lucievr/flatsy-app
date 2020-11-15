@@ -5,7 +5,6 @@ import DefaultText from './DefaultText';
 import ListIcon from '../assets/images/ListIcon';
 import MapIcon from '../assets/images/MapIcon';
 import SortIcon from '../assets/images/SortIcon';
-import Colours from '../constants/colours';
 
 const ListHeader = () => {
   return (
