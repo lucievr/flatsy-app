@@ -6,7 +6,7 @@ import ListIcon from '../assets/images/ListIcon';
 import MapIcon from '../assets/images/MapIcon';
 import SortIcon from '../assets/images/SortIcon';
 
-const ListHeader = () => {
+const FlatListHeader = () => {
   return (
     <View style={styles.listHeader}>
       <View style={styles.displayOptions}>
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ListHeader;
+export default FlatListHeader;

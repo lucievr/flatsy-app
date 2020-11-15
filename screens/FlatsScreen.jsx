@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
 import FlatItem from '../components/FlatItem';
-import ListHeader from '../components/ListHeader';
+import FlatListHeader from '../components/FlatListHeader';
 
 const flats = [
   {
@@ -54,16 +54,11 @@ const FlatsScreen = ({ navigation }) => {
         contentContainerStyle={{ width: '100%', alignItems: 'center' }}
         renderItem={({ item }) => (
           <FlatItem
+            item={item}
             navigation={navigation}
-            images={item.images}
-            price={item.price}
-            roomNr={item.roomNr}
-            address={item.address}
-            dateAdded={Number(item.dateAdded)}
-            dateAvailable={Number(item.dateAvailable)}
           />
         )}
-        ListHeaderComponent={() => <ListHeader />}
+        ListHeaderComponent={() => <FlatListHeader />}
       />
     </View>
   );
