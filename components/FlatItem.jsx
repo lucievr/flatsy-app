@@ -10,18 +10,39 @@ import ViewPager from '@react-native-community/viewpager';
 
 import DefaultText from './DefaultText';
 
+const DAY_IN_MS = 86400000;
+
 const FlatItem = ({
   images,
   price,
   roomNr,
   address,
   dateAdded,
+  dateAvailable,
   navigation,
 }) => {
   let Touchable = TouchableOpacity;
+  let creationDate;
+  let availabilityDate;
 
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     Touchable = TouchableNativeFeedback;
+  }
+
+  if (dateAdded === 0) {
+    creationDate = 'today';
+  } else if (dateAdded === 1) {
+    creationDate = 'yesterday';
+  } else {
+    const d = new Date(Date.now() - (dateAdded * DAY_IN_MS));
+    creationDate = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
+
+  if (dateAvailable === 0) {
+    availabilityDate = 'immediately';
+  } else {
+    const d = new Date(Date.now() + (dateAvailable * DAY_IN_MS));
+    availabilityDate = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
   }
 
   const onSingleTap = (event) => {
@@ -55,7 +76,8 @@ const FlatItem = ({
               <DefaultText>{price} €/month</DefaultText>
               <DefaultText>{roomNr} bedroom flat</DefaultText>
               <DefaultText>{address}</DefaultText>
-              <DefaultText>Added {dateAdded}</DefaultText>
+              <DefaultText>Added {creationDate}</DefaultText>
+              <DefaultText>Available {availabilityDate}</DefaultText>
             </View>
           </View>
         </Touchable>

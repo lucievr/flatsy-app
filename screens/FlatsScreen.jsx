@@ -15,7 +15,8 @@ const flats = [
     price: 600,
     roomNr: 1,
     address: 'Avenida da Republica 13, Lisbon 12451',
-    dateAdded: 'today',
+    dateAdded: 0,
+    dateAvailable: 0,
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
@@ -27,7 +28,8 @@ const flats = [
     price: 800,
     roomNr: 3,
     address: 'Praca da Luzia 22, Lisbon 13457',
-    dateAdded: 'today',
+    dateAdded: 1,
+    dateAvailable: 0,
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
@@ -39,7 +41,8 @@ const flats = [
     price: 750,
     roomNr: 2,
     address: 'Santa Maria de Coimbra 37, Lisbon 78934',
-    dateAdded: 'yesterday',
+    dateAdded: 2,
+    dateAvailable: 5,
   },
 ];
 
@@ -56,7 +59,8 @@ const FlatsScreen = ({ navigation }) => {
             price={item.price}
             roomNr={item.roomNr}
             address={item.address}
-            dateAdded={item.dateAdded}
+            dateAdded={Number(item.dateAdded)}
+            dateAvailable={Number(item.dateAvailable)}
           />
         )}
         ListHeaderComponent={() => <ListHeader />}
