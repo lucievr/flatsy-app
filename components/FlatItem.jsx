@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Text, Platform } from 'react-native';
 import { TouchableOpacity, TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 import ImageCarousel from './ImageCarousel';
@@ -22,9 +22,9 @@ const FlatItem = ({ item, navigation }) => {
           <View>
             <ImageCarousel item={item} images={images} navigation={navigation} touchable />
             <View style={styles.flatInfo}>
-              <DefaultText>{price} €/month</DefaultText>
-              <DefaultText>{roomNr} bedroom flat</DefaultText>
-              <DefaultText>{address}</DefaultText>
+              <View style={styles.priceInfo}><DefaultText style={styles.price}>{price} €</DefaultText><DefaultText style={styles.perMonth}>/month</DefaultText></View>
+              <DefaultText style={styles.flatType}>{roomNr} bedroom flat</DefaultText>
+              <DefaultText style={styles.address}>{address}</DefaultText>
               <DatesInfo dateAdded={dateAdded} dateAvailable={dateAvailable} />
             </View>
           </View>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     width: 400,
     maxWidth: '90%',
-    height: 400,
+    height: 410,
     margin: 10,
   },
   touchable: {
@@ -49,6 +49,24 @@ const styles = StyleSheet.create({
   flatInfo: {
     padding: 10,
   },
+  priceInfo: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingVertical: 8,
+  },
+  price: {
+    fontSize: 24,
+  },
+  perMonth: {
+    fontFamily: 'quicksand',
+  },
+  flatType: {
+    fontSize: 20,
+  },
+  address: {
+    fontFamily: 'quicksand',
+    paddingVertical: 5
+  }
 });
 
 export default FlatItem;

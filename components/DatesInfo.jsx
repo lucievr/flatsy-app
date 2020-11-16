@@ -1,5 +1,8 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
+import Colours from '../constants/colours';
+import CalendarIcon from '../assets/images/CalendarIcon';
 import DefaultText from './DefaultText';
 
 const DAY_IN_MS = 86400000;
@@ -28,11 +31,27 @@ const DatesInfo = ({ dateAdded, dateAvailable, detailed }) => {
     return (
       <>
         <DefaultText>Added {creationDate}</DefaultText>
-        <DefaultText>Available {availabilityDate}</DefaultText>
+        <View style={styles.available}>
+        <CalendarIcon />
+        <DefaultText style={styles.availableText}>Available {availabilityDate}</DefaultText>
+        </View>
       </>
     );
   }
-  return <DefaultText>Added {creationDate}</DefaultText>;
+  return <DefaultText style={styles.coloured}>Added {creationDate}</DefaultText>;
 };
+
+const styles = StyleSheet.create({
+  available: {
+    flexDirection: 'row',
+  },
+  availableText: {
+    color: Colours.darkAccent,
+    paddingLeft: 10,
+  },
+  coloured: {
+    color: Colours.darkAccent,
+  }
+});
 
 export default DatesInfo;

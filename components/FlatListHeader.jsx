@@ -23,7 +23,7 @@ const FlatListHeader = () => {
           <DefaultText style={styles.optionText}>Sort</DefaultText>
         </View>
       </View>
-      <DefaultText style={{ paddingVertical: 5}}>34 results</DefaultText>
+      <DefaultText style={styles.results}>34 results</DefaultText>
     </View>
   )
 }
@@ -39,15 +39,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    paddingVertical: 15,
+    paddingVertical: 14,
     marginBottom: 10
   },
   optionText: {
-    fontSize: 20,
+    fontSize: 18,
     paddingHorizontal: 10
   },
   optionTextMap: {
-    fontSize: 20,
+    fontSize: 18,
     paddingRight: 10,
     paddingLeft: 8,
   },
@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
   sort: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  results: {
+    fontFamily: 'quicksand',
+    paddingVertical: 5
   }
 });
 

@@ -23,6 +23,7 @@ const Tab = createBottomTabNavigator();
 const defaultNavOptions = {
   headerTitleStyle: {
     fontFamily: 'quicksand',
+    fontSize: 19,
   },
   headerTintColor: Colours.primary,
   headerTitleAlign: 'center',

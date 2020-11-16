@@ -11,7 +11,7 @@ const DefaultText = (props) => {
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'quicksand-semibold',
-    fontSize: 16,
+    fontSize: 18,
     color: Colours.primary
   },
 });
