@@ -17,7 +17,7 @@ const CustomButton = (props) => {
   }
 
   return (
-    <View style={styles.buttonContainer}>
+    <View style={{...styles.buttonContainer, ...props.style }}>
       <ButtonComponent onPress={props.onPress} activeOpacity={0.7}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>{props.children}</Text>
@@ -32,7 +32,9 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     overflow: 'hidden',
     width: '80%',
-    maxWidth: 400
+    maxWidth: 400,
+    marginTop: 10,
+    marginBottom: 20
   },
   button: {
     backgroundColor: Colours.accent,

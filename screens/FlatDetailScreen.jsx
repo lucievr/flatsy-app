@@ -9,33 +9,72 @@ import BedIcon from '../assets/images/BedIcon';
 import BathIcon from '../assets/images/BathIcon';
 
 const FlatDetailScreen = ({ navigation, route }) => {
-  const { images, dateAdded, dateAvailable, price, roomNr, bathNr, address } = route.params.item;
+  const {
+    images,
+    dateAdded,
+    dateAvailable,
+    price,
+    roomNr,
+    bathNr,
+    address,
+  } = route.params.item;
 
   return (
-    <ScrollView contentContainerStyle={styles.screen}>
-      <ImageCarousel images={images} />
-            <View style={styles.flatInfo}>
-              <View style={styles.priceInfo}><DefaultText style={styles.price}>{price} €</DefaultText><DefaultText style={styles.perMonth}>/month</DefaultText></View>
-              <DefaultText style={styles.flatType}>{roomNr} bedroom flat</DefaultText>
-              <DefaultText style={styles.address}>{address}</DefaultText>
-              <View style={styles.flatIcons}><BedIcon /><DefaultText style={styles.iconText}>{roomNr}</DefaultText><BathIcon /><DefaultText style={styles.iconText}>{bathNr}</DefaultText></View>
-              <DatesInfo dateAdded={dateAdded} dateAvailable={dateAvailable} detailed />
+    <View style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.itemContainer}>
+          <ImageCarousel images={images} />
+          <View style={styles.flatInfo}>
+            <View style={styles.priceInfo}>
+              <DefaultText style={styles.price}>{price} €</DefaultText>
+              <DefaultText style={styles.perMonth}>/month</DefaultText>
             </View>
-      <CustomButton onPress={() => navigation.navigate('Contact')}>
-        Contact now!
-      </CustomButton>
-    </ScrollView>
+            <DefaultText style={styles.flatType}>
+              {roomNr} bedroom flat
+            </DefaultText>
+            <DefaultText style={styles.address}>{address}</DefaultText>
+            <View style={styles.flatIcons}>
+              <BedIcon />
+              <DefaultText style={styles.iconText}>{roomNr}</DefaultText>
+              <BathIcon />
+              <DefaultText style={styles.iconText}>{bathNr}</DefaultText>
+            </View>
+            <DatesInfo
+              dateAdded={dateAdded}
+              dateAvailable={dateAvailable}
+              detailed
+            />
+          </View>
+          <CustomButton style={{ width: '95%'}} onPress={() => navigation.navigate('Contact')}>
+            Contact now!
+          </CustomButton>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
+  },
+  scrollView: {
+    width: '100%',
+  },
+  itemContainer: {
+    width: 370,
+    maxWidth: '90%',
+    margin: 10,
+    marginTop: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center'
   },
   flatInfo: {
-    padding: 10,
+    paddingTop: 10,
   },
   priceInfo: {
     flexDirection: 'row',
@@ -53,15 +92,16 @@ const styles = StyleSheet.create({
   },
   address: {
     fontFamily: 'quicksand',
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   flatIcons: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginVertical: 6,
   },
   iconText: {
     paddingLeft: 10,
-    paddingRight: 15
-  }
+    paddingRight: 15,
+  },
 });
 
 export default FlatDetailScreen;

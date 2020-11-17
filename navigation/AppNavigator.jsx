@@ -12,6 +12,7 @@ import FlatsScreen from '../screens/FlatsScreen';
 import FlatDetailScreen from '../screens/FlatDetailScreen';
 import ContactScreen from '../screens/ContactScreen';
 import AccountScreen from '../screens/AccountScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 
 import HomeIcon from '../assets/images/HomeIcon';
 import SearchIcon from '../assets/images/SearchIcon';
@@ -96,6 +97,11 @@ const AppNavigator = () => {
           options={{ headerTitle: 'Flat detail' }}
         />
         <Root.Screen name='Contact' component={ContactScreen} />
+        <Root.Screen
+          name='SignUp'
+          component={SignUpScreen}
+          options={{ headerTitle: 'Sign up' }}
+        />
       </Root.Navigator>
     </NavigationContainer>
   );

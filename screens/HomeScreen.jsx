@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 10
   },
   title: {
     fontFamily: 'quicksand-semibold',
@@ -40,7 +42,8 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 20,
     maxWidth: '60%',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 10
   }
 });
 

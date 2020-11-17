@@ -45,7 +45,7 @@ const ImageCarousel = ({ item, images, navigation, touchable }) => {
 const styles = StyleSheet.create({
   viewPager: {
     width: '100%',
-    height: '61%',
+    height: 246,
   },
   imageContainer: {
     borderTopLeftRadius: 10,

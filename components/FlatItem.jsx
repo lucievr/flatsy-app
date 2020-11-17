@@ -36,9 +36,8 @@ const FlatItem = ({ item, navigation }) => {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    width: 400,
+    width: 370,
     maxWidth: '90%',
-    height: 410,
     margin: 10,
   },
   touchable: {
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
   },
   flatInfo: {
     padding: 10,
+    paddingBottom: 20
   },
   priceInfo: {
     flexDirection: 'row',

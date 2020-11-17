@@ -44,6 +44,11 @@ const DatesInfo = ({ dateAdded, dateAvailable, detailed }) => {
 const styles = StyleSheet.create({
   available: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 10,
+    marginTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ccc'
   },
   availableText: {
     color: Colours.darkAccent,
