@@ -25,6 +25,7 @@ const fetchFonts = () => {
 
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
+
   if (!fontLoaded) {
     return (
       <AppLoading

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setCurrentUser } from '../store/actions/user';
+import { auth, createUserProfileDocument } from '../firebase/firebase';
 
 import Colours from '../constants/colours';
 import HomeScreen from '../screens/HomeScreen';
@@ -13,6 +17,7 @@ import FlatDetailScreen from '../screens/FlatDetailScreen';
 import ContactScreen from '../screens/ContactScreen';
 import AccountScreen from '../screens/AccountScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import SignInScreen from '../screens/SignInScreen';
 
 import HomeIcon from '../assets/images/HomeIcon';
 import SearchIcon from '../assets/images/SearchIcon';
@@ -34,7 +39,6 @@ const HomeTabs = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ color }) => {
-
         if (route.name === 'Flats') {
           return <SearchIcon color={color} />;
         } else if (route.name === 'Account') {
@@ -49,12 +53,12 @@ const HomeTabs = () => (
       inactiveTintColor: 'grey',
       labelStyle: {
         fontSize: 15,
-        marginBottom: 5
+        marginBottom: 5,
       },
       style: {
         height: 55,
-        padding: 5
-      }
+        padding: 5,
+      },
     }}
   >
     <Tab.Screen name='Home' component={HomeScreen} />
@@ -64,6 +68,32 @@ const HomeTabs = () => (
 );
 
 const AppNavigator = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          dispatch(
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+            })
+          );
+        });
+      }
+
+      dispatch(setCurrentUser(userAuth));
+    });
+
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, [dispatch]);
+
   const getHeaderTitle = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
 
@@ -101,6 +131,11 @@ const AppNavigator = () => {
           name='SignUp'
           component={SignUpScreen}
           options={{ headerTitle: 'Sign up' }}
+        />
+        <Root.Screen
+          name='SignIn'
+          component={SignInScreen}
+          options={{ headerTitle: 'Log in' }}
         />
       </Root.Navigator>
     </NavigationContainer>
