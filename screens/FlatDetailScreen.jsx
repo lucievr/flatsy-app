@@ -8,7 +8,7 @@ import DatesInfo from '../components/DatesInfo';
 import BedIcon from '../assets/images/BedIcon';
 import BathIcon from '../assets/images/BathIcon';
 
-const FlatDetailScreen = ({ navigation, route }) => {
+const FlatDetailScreen = ({ route }) => {
   const {
     images,
     dateAdded,
@@ -25,6 +25,11 @@ const FlatDetailScreen = ({ navigation, route }) => {
         <View style={styles.itemContainer}>
           <ImageCarousel images={images} />
           <View style={styles.flatInfo}>
+          <DatesInfo
+              dateAdded={dateAdded}
+              dateAvailable={dateAvailable}
+              detailed
+            />
             <View style={styles.priceInfo}>
               <DefaultText style={styles.price}>{price} €</DefaultText>
               <DefaultText style={styles.perMonth}>/month</DefaultText>
@@ -32,22 +37,14 @@ const FlatDetailScreen = ({ navigation, route }) => {
             <DefaultText style={styles.flatType}>
               {roomNr} bedroom flat
             </DefaultText>
-            <DefaultText style={styles.address}>{address}</DefaultText>
+                        <DefaultText style={styles.address}>{address}</DefaultText>
             <View style={styles.flatIcons}>
               <BedIcon />
               <DefaultText style={styles.iconText}>{roomNr}</DefaultText>
               <BathIcon />
               <DefaultText style={styles.iconText}>{bathNr}</DefaultText>
             </View>
-            <DatesInfo
-              dateAdded={dateAdded}
-              dateAvailable={dateAvailable}
-              detailed
-            />
           </View>
-          <CustomButton style={{ width: '95%'}} onPress={() => navigation.navigate('Contact')}>
-            Contact now!
-          </CustomButton>
         </View>
       </ScrollView>
     </View>
@@ -69,6 +66,7 @@ const styles = StyleSheet.create({
     maxWidth: '90%',
     margin: 10,
     marginTop: 20,
+    paddingBottom: 10,
     backgroundColor: 'white',
     borderRadius: 10,
     alignItems: 'center'
@@ -89,6 +87,7 @@ const styles = StyleSheet.create({
   },
   flatType: {
     fontSize: 20,
+    paddingVertical: 5,
   },
   address: {
     fontFamily: 'quicksand',
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   },
   flatIcons: {
     flexDirection: 'row',
-    marginVertical: 6,
+    paddingVertical: 8,
   },
   iconText: {
     paddingLeft: 10,

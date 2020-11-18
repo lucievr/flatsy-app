@@ -24,13 +24,12 @@ const DatesInfo = ({ dateAdded, dateAvailable, detailed }) => {
     availabilityDate = 'immediately';
   } else {
     const d = new Date(Date.now() + +dateAvailable * DAY_IN_MS);
-    availabilityDate = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    availabilityDate = `from ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
   }
 
   if (detailed) {
     return (
       <>
-        <DefaultText>Added {creationDate}</DefaultText>
         <View style={styles.available}>
         <CalendarIcon />
         <DefaultText style={styles.availableText}>Available {availabilityDate}</DefaultText>
@@ -45,10 +44,12 @@ const styles = StyleSheet.create({
   available: {
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingTop: 10,
+    paddingVertical: 10,
     marginTop: 10,
     borderTopWidth: 1,
-    borderTopColor: '#ccc'
+    borderTopColor: '#ccc',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
   availableText: {
     color: Colours.darkAccent,

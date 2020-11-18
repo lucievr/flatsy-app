@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { setCurrentUser } from '../store/actions/user';
 import { auth, createUserProfileDocument } from '../firebase/firebase';
@@ -18,7 +18,7 @@ import ContactScreen from '../screens/ContactScreen';
 import AccountScreen from '../screens/AccountScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import SignInScreen from '../screens/SignInScreen';
-
+import CustomButton from '../components/CustomButton';
 import HomeIcon from '../assets/images/HomeIcon';
 import SearchIcon from '../assets/images/SearchIcon';
 import AccountIcon from '../assets/images/AccountIcon';
@@ -67,9 +67,36 @@ const HomeTabs = () => (
   </Tab.Navigator>
 );
 
+const FlatDetailTab = () => (
+  <Tab.Navigator
+    showLabel='false'
+    tabBarOptions={{
+      style: {
+        height: 97,
+        alignItems: 'center',
+        paddingTop: 10
+      },
+    }}
+  >
+    <Tab.Screen
+      name='Detail'
+      component={FlatDetailScreen}
+      options={({ navigation }) => ({
+        tabBarButton: () => (
+          <CustomButton
+            style={{ width: '85%' }}
+            onPress={() => navigation.navigate('Contact')}
+          >
+            Contact now!
+          </CustomButton>
+        ),
+      })}
+    />
+  </Tab.Navigator>
+);
+
 const AppNavigator = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -123,7 +150,7 @@ const AppNavigator = () => {
         />
         <Root.Screen
           name='Detail'
-          component={FlatDetailScreen}
+          component={FlatDetailTab}
           options={{ headerTitle: 'Flat detail' }}
         />
         <Root.Screen name='Contact' component={ContactScreen} />

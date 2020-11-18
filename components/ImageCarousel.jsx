@@ -7,7 +7,10 @@ const ImageCarousel = ({ item, images, navigation, touchable }) => {
   const onSingleTap = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
       // TODO pass only flatId and fetch item in detail page based on this id
-      navigation.navigate('Detail', { item: item });
+      navigation.navigate('Detail', {
+        screen: 'Detail',
+        params: { item: item },
+      });
     }
   };
 
