@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, Platform } from 'react-native';
-import { TouchableOpacity, TouchableNativeFeedback } from 'react-native-gesture-handler';
+import { View, StyleSheet, Platform } from 'react-native';
+import { TouchableOpacity, TouchableNativeFeedback, State, TapGestureHandler } from 'react-native-gesture-handler';
 
 import ImageCarousel from './ImageCarousel';
 import DefaultText from './DefaultText';
@@ -15,18 +15,30 @@ const FlatItem = ({ item, navigation }) => {
     Touchable = TouchableNativeFeedback;
   }
 
+  const onSingleTap = (event) => {
+    if (event.nativeEvent.state === State.ACTIVE) {
+      // TODO pass only flatId and fetch item in detail page based on this id
+      navigation.navigate('Detail', {
+        screen: 'Detail',
+        params: { item: item },
+      });
+    }
+  };
+
   return (
     <View style={styles.itemContainer}>
       <View style={styles.touchable}>
         <Touchable useForeground>
           <View>
             <ImageCarousel item={item} images={images} navigation={navigation} touchable />
+            <TapGestureHandler onHandlerStateChange={onSingleTap}>
             <View style={styles.flatInfo}>
               <View style={styles.priceInfo}><DefaultText style={styles.price}>{price} €</DefaultText><DefaultText style={styles.perMonth}>/month</DefaultText></View>
               <DefaultText style={styles.flatType}>{roomNr} bedroom flat</DefaultText>
               <DefaultText style={styles.address}>{address}</DefaultText>
               <DatesInfo dateAdded={dateAdded} dateAvailable={dateAvailable} />
             </View>
+            </TapGestureHandler>
           </View>
         </Touchable>
       </View>

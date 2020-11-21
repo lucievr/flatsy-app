@@ -54,7 +54,7 @@ const SignUpScreen = ({ navigation }) => {
       style={styles.screen}
     >
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <DefaultText style={styles.label}>Display name</DefaultText>
+        <DefaultText style={styles.label}>Username</DefaultText>
         <Controller
           control={control}
           render={({ onChange, onBlur, value }) => (
