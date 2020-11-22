@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import DefaultText from './DefaultText';
 import ListIcon from '../assets/images/ListIcon';
 import MapIcon from '../assets/images/MapIcon';
 import SortIcon from '../assets/images/SortIcon';
 
-const FlatListHeader = () => {
+const FlatListHeader = ({ onOpenModal }) => {
   return (
     <View style={styles.listHeader}>
       <View style={styles.displayOptions}>
@@ -18,10 +18,10 @@ const FlatListHeader = () => {
           <MapIcon />
           <DefaultText style={styles.optionTextMap}>Map</DefaultText>
         </View>
-        <View style={styles.sort}>
+        <TouchableOpacity style={styles.sort} onPress={onOpenModal}>
           <SortIcon />
           <DefaultText style={styles.optionText}>Sort</DefaultText>
-        </View>
+        </TouchableOpacity>
       </View>
       <DefaultText style={styles.results}>34 results</DefaultText>
     </View>
