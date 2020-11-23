@@ -194,7 +194,8 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     width: '100%',
-    minHeight: '81%',
+    height: '81%',
+    alignItems: 'center',
   },
   container: {
     flex: 1,

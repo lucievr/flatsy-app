@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   results: {
     fontFamily: 'quicksand',
-    paddingVertical: 5,
+    marginBottom: 10,
     alignSelf: 'flex-start',
   }
 });
