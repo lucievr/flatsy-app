@@ -30,10 +30,11 @@ const FlatListHeader = ({ onOpenModal }) => {
 
 const styles = StyleSheet.create({
   listHeader: {
-    width: '100%',
+    width: '90%',
+    alignItems: 'center',
   },
   displayOptions: {
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -70,7 +71,8 @@ const styles = StyleSheet.create({
   },
   results: {
     fontFamily: 'quicksand',
-    paddingVertical: 5
+    paddingVertical: 5,
+    alignSelf: 'flex-start',
   }
 });
 

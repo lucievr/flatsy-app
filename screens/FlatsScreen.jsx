@@ -14,6 +14,7 @@ import FlatItem from '../components/FlatItem';
 import FlatListHeader from '../components/FlatListHeader';
 import DefaultText from '../components/DefaultText';
 import CustomRadioButton from '../components/CustomRadioButton';
+import CustomMapView from '../components/MapView';
 import Colours from '../constants/colours';
 
 const flats = [
@@ -30,6 +31,10 @@ const flats = [
     address: 'Avenida da Republica 13, Lisbon 12451',
     dateAdded: 0,
     dateAvailable: 0,
+    coords: {
+      latitude: 38.71414990352129,
+      longitude: -9.13931075353304,
+    },
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
@@ -44,6 +49,10 @@ const flats = [
     address: 'Praca da Luzia 22, Lisbon 13457',
     dateAdded: 1,
     dateAvailable: 0,
+    coords: {
+      latitude: 38.72418705322095,
+      longitude: -9.13438291050221,
+    },
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
@@ -58,6 +67,10 @@ const flats = [
     address: 'Santa Maria de Coimbra 37, Lisbon 78934',
     dateAdded: 2,
     dateAvailable: 5,
+    coords: {
+      latitude: 38.72496496500625,
+      longitude: -9.147521956175757,
+    },
   },
 ];
 
@@ -84,6 +97,7 @@ const FlatsScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sortValue, setSortValue] = useState(0);
   const [sortedFlats, setSortedFlats] = useState(flats);
+  const [mapView, setMapView] = useState(false);
 
   const handleOnPress = (value) => {
     setSortValue(value);
@@ -93,7 +107,7 @@ const FlatsScreen = ({ navigation }) => {
   };
 
   const sortFlats = () => {
-    switch(sortValue) {
+    switch (sortValue) {
       case 0:
         return setSortedFlats(flats.sort((a, b) => a.dateAdded - b.dateAdded));
       case 1:
@@ -113,42 +127,55 @@ const FlatsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
-      <FlatList
-        data={sortedFlats}
-        contentContainerStyle={{ width: '100%', alignItems: 'center' }}
-        renderItem={({ item }) => (
-          <FlatItem item={item} navigation={navigation} />
-        )}
-        ListHeaderComponent={() => (
+      {!mapView ? (
+        <View style={styles.mapScreen}>
           <FlatListHeader onOpenModal={() => setModalVisible(true)} />
-        )}
-      />
-      {modalVisible && (
-        <Modal
-          animationType='fade'
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <TouchableOpacity
-            style={styles.container}
-            activeOpacity={1}
-            onPressOut={() => setModalVisible(false)}
-          >
-            <View>
-              <TouchableWithoutFeedback>
-                <View style={styles.modalContainer}>
-                  <DefaultText style={styles.sortByHeader}>Sort by:</DefaultText>
-                  <CustomRadioButton
-                    options={sortOptions}
-                    onPress={handleOnPress}
-                    selected={sortValue}
-                  />
+          <View style={styles.mapContainer}>
+            <CustomMapView flats={flats} />
+          </View>
+        </View>
+      ) : (
+        <>
+          <FlatList
+            data={sortedFlats}
+            contentContainerStyle={{ width: '100%', alignItems: 'center' }}
+            renderItem={({ item }) => (
+              <FlatItem item={item} navigation={navigation} />
+            )}
+            ListHeaderComponent={() => (
+              <FlatListHeader onOpenModal={() => setModalVisible(true)} />
+            )}
+          />
+          {modalVisible && (
+            <Modal
+              animationType='fade'
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => setModalVisible(false)}
+            >
+              <TouchableOpacity
+                style={styles.container}
+                activeOpacity={1}
+                onPressOut={() => setModalVisible(false)}
+              >
+                <View>
+                  <TouchableWithoutFeedback>
+                    <View style={styles.modalContainer}>
+                      <DefaultText style={styles.sortByHeader}>
+                        Sort by:
+                      </DefaultText>
+                      <CustomRadioButton
+                        options={sortOptions}
+                        onPress={handleOnPress}
+                        selected={sortValue}
+                      />
+                    </View>
+                  </TouchableWithoutFeedback>
                 </View>
-              </TouchableWithoutFeedback>
-            </View>
-          </TouchableOpacity>
-        </Modal>
+              </TouchableOpacity>
+            </Modal>
+          )}
+        </>
       )}
     </View>
   );
@@ -159,6 +186,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  mapScreen: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+  },
+  mapContainer: {
+    width: '100%',
+    minHeight: '81%',
   },
   container: {
     flex: 1,
@@ -176,7 +212,7 @@ const styles = StyleSheet.create({
   sortByHeader: {
     fontSize: 21,
     marginBottom: 10,
-  }
+  },
 });
 
 export default FlatsScreen;
