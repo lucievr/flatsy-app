@@ -6,21 +6,23 @@ import ListIcon from '../assets/images/ListIcon';
 import MapIcon from '../assets/images/MapIcon';
 import SortIcon from '../assets/images/SortIcon';
 
-const FlatListHeader = ({ onOpenModal }) => {
+import Colours from '../constants/colours';
+
+const FlatListHeader = ({ mapView, onSetListView, onSetMapView, onOpenModal }) => {
   return (
     <View style={styles.listHeader}>
       <View style={styles.displayOptions}>
-        <View style={styles.list}>
-          <ListIcon />
-          <DefaultText style={styles.optionText}>List</DefaultText>
-        </View>
-        <View style={styles.map}>
-          <MapIcon />
-          <DefaultText style={styles.optionTextMap}>Map</DefaultText>
-        </View>
-        <TouchableOpacity style={styles.sort} onPress={onOpenModal}>
-          <SortIcon />
-          <DefaultText style={styles.optionText}>Sort</DefaultText>
+        <TouchableOpacity style={styles.list} onPress={mapView ? onSetListView : () => {}}>
+          <ListIcon color={mapView ? Colours.primary : Colours.darkAccent} />
+          <DefaultText style={{...styles.optionText, color: mapView ? Colours.primary : Colours.darkAccent}}>List</DefaultText>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.map} onPress={!mapView ? onSetMapView : () => {}}>
+          <MapIcon color={mapView ? Colours.darkAccent : Colours.primary} />
+          <DefaultText style={{...styles.optionTextMap, color: mapView ? Colours.darkAccent : Colours.primary}}>Map</DefaultText>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sort} onPress={!mapView ? onOpenModal : () => {}}>
+          <SortIcon color={mapView ? '#ccc' : Colours.primary} />
+          <DefaultText style={{...styles.optionText, color: mapView ? '#ccc' : Colours.primary}}>Sort</DefaultText>
         </TouchableOpacity>
       </View>
       <DefaultText style={styles.results}>34 results</DefaultText>

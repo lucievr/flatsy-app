@@ -6,8 +6,6 @@ import {
   Modal,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ScrollView,
-  Text,
 } from 'react-native';
 
 import FlatItem from '../components/FlatItem';
@@ -127,9 +125,9 @@ const FlatsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
-      {!mapView ? (
+      {mapView ? (
         <View style={styles.mapScreen}>
-          <FlatListHeader onOpenModal={() => setModalVisible(true)} />
+          <FlatListHeader mapView onSetListView={() => setMapView(false)} />
           <View style={styles.mapContainer}>
             <CustomMapView flats={flats} />
           </View>
@@ -143,7 +141,7 @@ const FlatsScreen = ({ navigation }) => {
               <FlatItem item={item} navigation={navigation} />
             )}
             ListHeaderComponent={() => (
-              <FlatListHeader onOpenModal={() => setModalVisible(true)} />
+              <FlatListHeader onOpenModal={() => setModalVisible(true)} onSetMapView={() => setMapView(true)} />
             )}
           />
           {modalVisible && (
