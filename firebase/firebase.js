@@ -13,7 +13,9 @@ const firebaseConfig = {
   measurementId: "G-RFK206PG98"
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -38,6 +40,26 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+export const convertFlatsSnapshotToMap = flats => {
+  const transformedCollection = flats.docs.map(doc => {
+    const { roomNr, bathNr, price, dateAdded, dateAvailable, images, address, coords } = doc.data();
+
+    return {
+      id: doc.id,
+      roomNr,
+      bathNr,
+      price,
+      dateAdded,
+      dateAvailable,
+      images,
+      address,
+      coords
+    };
+  });
+
+  return transformedCollection;
 };
 
 export const auth = firebase.auth();

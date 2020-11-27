@@ -6,71 +6,17 @@ import {
   Modal,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { fetchFlatsStartAsync } from '../store/actions/flats';
 import FlatItem from '../components/FlatItem';
 import FlatListHeader from '../components/FlatListHeader';
 import DefaultText from '../components/DefaultText';
 import CustomRadioButton from '../components/CustomRadioButton';
 import CustomMapView from '../components/MapView';
 import Colours from '../constants/colours';
-
-const flats = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    images: [
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-2dcYhvbHV-M-unsplash.jpg?alt=media&token=53232b2c-a6e8-4d12-9ccb-27bb8b8f7123',
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-MP0bgaS_d1c-unsplash.jpg?alt=media&token=2a23b694-5d66-47c3-ba60-449be87f9170',
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-bI1Su2hK084-unsplash.jpg?alt=media&token=393b29ee-bab8-49ac-8aed-99d44e034f7b',
-    ],
-    price: 600,
-    roomNr: 1,
-    bathNr: 1,
-    address: 'Avenida da Republica 13, Lisbon 12451',
-    dateAdded: 0,
-    dateAvailable: 0,
-    coords: {
-      latitude: 38.71414990352129,
-      longitude: -9.13931075353304,
-    },
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    images: [
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-2dcYhvbHV-M-unsplash.jpg?alt=media&token=53232b2c-a6e8-4d12-9ccb-27bb8b8f7123',
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-MP0bgaS_d1c-unsplash.jpg?alt=media&token=2a23b694-5d66-47c3-ba60-449be87f9170',
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-bI1Su2hK084-unsplash.jpg?alt=media&token=393b29ee-bab8-49ac-8aed-99d44e034f7b',
-    ],
-    price: 800,
-    roomNr: 3,
-    bathNr: 2,
-    address: 'Praca da Luzia 22, Lisbon 13457',
-    dateAdded: 1,
-    dateAvailable: 0,
-    coords: {
-      latitude: 38.72418705322095,
-      longitude: -9.13438291050221,
-    },
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    images: [
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-2dcYhvbHV-M-unsplash.jpg?alt=media&token=53232b2c-a6e8-4d12-9ccb-27bb8b8f7123',
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-MP0bgaS_d1c-unsplash.jpg?alt=media&token=2a23b694-5d66-47c3-ba60-449be87f9170',
-      'https://firebasestorage.googleapis.com/v0/b/padma-db.appspot.com/o/naomi-hebert-bI1Su2hK084-unsplash.jpg?alt=media&token=393b29ee-bab8-49ac-8aed-99d44e034f7b',
-    ],
-    price: 750,
-    roomNr: 2,
-    bathNr: 1,
-    address: 'Santa Maria de Coimbra 37, Lisbon 78934',
-    dateAdded: 2,
-    dateAvailable: 5,
-    coords: {
-      latitude: 38.72496496500625,
-      longitude: -9.147521956175757,
-    },
-  },
-];
 
 const sortOptions = [
   {
@@ -92,6 +38,9 @@ const sortOptions = [
 ];
 
 const FlatsScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const flats = useSelector((state) => state.flats.flats);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [sortValue, setSortValue] = useState(0);
   const [sortedFlats, setSortedFlats] = useState(flats);
@@ -120,14 +69,20 @@ const FlatsScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    sortFlats();
-  }, [sortValue]);
+    if (flats) {
+      sortFlats();
+    }
+  }, [sortValue, flats]);
+
+  useEffect(() => {
+    dispatch(fetchFlatsStartAsync());
+  }, [dispatch]);
 
   return (
     <View style={styles.screen}>
       {mapView ? (
         <View style={styles.mapScreen}>
-          <FlatListHeader mapView onSetListView={() => setMapView(false)} />
+          <FlatListHeader mapView onSetListView={() => setMapView(false)} resultsTotal={flats.length} />
           <View style={styles.mapContainer}>
             <CustomMapView flats={flats} navigation={navigation} />
           </View>
@@ -136,12 +91,24 @@ const FlatsScreen = ({ navigation }) => {
         <>
           <FlatList
             data={sortedFlats}
+            keyExtractor={(item) => item.id}
             contentContainerStyle={{ width: '100%', alignItems: 'center' }}
             renderItem={({ item }) => (
               <FlatItem item={item} navigation={navigation} />
             )}
+            ListEmptyComponent={() => (
+              <ActivityIndicator
+                size='large'
+                color={Colours.accent}
+                style={{ marginVertical: 30 }}
+              />
+            )}
             ListHeaderComponent={() => (
-              <FlatListHeader onOpenModal={() => setModalVisible(true)} onSetMapView={() => setMapView(true)} />
+              <FlatListHeader
+                onOpenModal={() => setModalVisible(true)}
+                onSetMapView={() => setMapView(true)}
+                resultsTotal={flats.length}
+              />
             )}
           />
           {modalVisible && (

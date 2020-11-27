@@ -7,9 +7,10 @@ import * as Font from 'expo-font';
 
 import AppNavigator from './navigation/AppNavigator';
 import userReducer from './store/reducers/user';
+import flatsReducer from './store/reducers/flats';
 
 const rootReducer = combineReducers({
-  // flats: flatsReducer,
+  flats: flatsReducer,
   user: userReducer,
 });
 

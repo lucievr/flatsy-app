@@ -8,7 +8,7 @@ import SortIcon from '../assets/images/SortIcon';
 
 import Colours from '../constants/colours';
 
-const FlatListHeader = ({ mapView, onSetListView, onSetMapView, onOpenModal }) => {
+const FlatListHeader = ({ resultsTotal, mapView, onSetListView, onSetMapView, onOpenModal }) => {
   return (
     <View style={styles.listHeader}>
       <View style={styles.displayOptions}>
@@ -25,7 +25,7 @@ const FlatListHeader = ({ mapView, onSetListView, onSetMapView, onOpenModal }) =
           <DefaultText style={{...styles.optionText, color: mapView ? '#ccc' : Colours.primary}}>Sort</DefaultText>
         </TouchableOpacity>
       </View>
-      <DefaultText style={styles.results}>34 results</DefaultText>
+      <DefaultText style={styles.results}>{resultsTotal} results</DefaultText>
     </View>
   )
 }
