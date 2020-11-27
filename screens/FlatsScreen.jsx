@@ -84,7 +84,7 @@ const FlatsScreen = ({ navigation }) => {
         <View style={styles.mapScreen}>
           <FlatListHeader mapView onSetListView={() => setMapView(false)} resultsTotal={flats.length} />
           <View style={styles.mapContainer}>
-            <CustomMapView flats={flats} navigation={navigation} />
+            <CustomMapView navigation={navigation} />
           </View>
         </View>
       ) : (

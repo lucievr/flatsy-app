@@ -2,12 +2,14 @@ import React, { useState, useRef, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { Svg, Image as ImageSvg } from 'react-native-svg';
+import { useSelector } from 'react-redux';
 
 import PinIcon from '../assets/images/PinIcon';
 import DefaultText from '../components/DefaultText';
 import DatesInfo from '../components/DatesInfo';
 
-const CustomMapView = ({ flats, navigation }) => {
+const CustomMapView = ({ navigation }) => {
+  const flats = useSelector((state) => state.flats.flats);
   const [isMapReady, setMapReady] = useState(false);
   const [mapRegion, setMapRegion] = useState({
     latitude: 38.73964430534495,
@@ -41,7 +43,7 @@ const CustomMapView = ({ flats, navigation }) => {
       zoomEnabled
     >
       {flats.map((flat, index) => (
-        <Marker key={index} coordinate={flat.coords}>
+        <Marker key={index} coordinate={{ latitude: flat.coords.latitude, longitude: flat.coords.longitude}}>
           <PinIcon />
           <Callout style={styles.callout} onPress={() => handleSeeDetail(flat)}>
             <View style={{ width: 120, height: 90, paddingLeft: 2 }}>
