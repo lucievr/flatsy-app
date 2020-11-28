@@ -6,7 +6,7 @@ import ImageCarousel from './ImageCarousel';
 import DefaultText from './DefaultText';
 import DatesInfo from './DatesInfo';
 
-const FlatItem = ({ item, navigation }) => {
+const FlatItem = React.memo(({ item, navigation }) => {
   const { images, price, roomNr, address, dateAdded, dateAvailable } = item;
 
   let Touchable = TouchableOpacity;
@@ -44,7 +44,7 @@ const FlatItem = ({ item, navigation }) => {
       </View>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   itemContainer: {

@@ -15,6 +15,7 @@ import FlatItem from '../components/FlatItem';
 import FlatListHeader from '../components/FlatListHeader';
 import DefaultText from '../components/DefaultText';
 import CustomRadioButton from '../components/CustomRadioButton';
+import CustomButton from '../components/CustomButton';
 import CustomMapView from '../components/MapView';
 import Colours from '../constants/colours';
 
@@ -40,11 +41,28 @@ const sortOptions = [
 const FlatsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const flats = useSelector((state) => state.flats.flats);
+  const isFetching = useSelector((state) => state.flats.isFetching);
+  const errorMessage = useSelector((state) => state.flats.errorMessage);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [sortValue, setSortValue] = useState(0);
   const [sortedFlats, setSortedFlats] = useState(flats);
   const [mapView, setMapView] = useState(false);
+
+  const sortFlats = () => {
+    switch (sortValue) {
+      case 0:
+        return setSortedFlats([...flats.sort((a, b) => a.dateAdded - b.dateAdded)]);
+      case 1:
+        return setSortedFlats([...flats.sort((a, b) => b.dateAdded - a.dateAdded)]);
+      case 2:
+        return setSortedFlats([...flats.sort((a, b) => a.price - b.price)]);
+      case 3:
+        return setSortedFlats([...flats.sort((a, b) => b.price - a.price)]);
+      default:
+        return sortedFlats;
+    }
+  };
 
   const handleOnPress = (value) => {
     setSortValue(value);
@@ -53,36 +71,48 @@ const FlatsScreen = ({ navigation }) => {
     }, 1000);
   };
 
-  const sortFlats = () => {
-    switch (sortValue) {
-      case 0:
-        return setSortedFlats(flats.sort((a, b) => a.dateAdded - b.dateAdded));
-      case 1:
-        return setSortedFlats(flats.sort((a, b) => b.dateAdded - a.dateAdded));
-      case 2:
-        return setSortedFlats(flats.sort((a, b) => a.price - b.price));
-      case 3:
-        return setSortedFlats(flats.sort((a, b) => b.price - a.price));
-      default:
-        return sortedFlats;
-    }
+  const handleRefresh = () => {
+    dispatch(fetchFlatsStartAsync());
   };
 
+  const handleRenderItem = ({item}) => {
+    return <FlatItem item={item} navigation={navigation} />;
+  }
+
   useEffect(() => {
-    if (flats) {
-      sortFlats();
-    }
+    sortFlats();
   }, [sortValue, flats]);
 
   useEffect(() => {
     dispatch(fetchFlatsStartAsync());
   }, [dispatch]);
 
+  if (errorMessage) {
+    return (
+      <View style={styles.screen}>
+        <View style={styles.mapScreen}>
+          <FlatListHeader
+            resultsTotal={flats.length || 0}
+          />
+          <View style={{ width: '100%', justifyContent: 'space-evenly', alignItems: 'center', flex: 1}}>
+            <DefaultText style={styles.errorMsg}>An Error Ocurred!</DefaultText>
+            <DefaultText>{errorMessage}</DefaultText>
+            <CustomButton onPress={handleRefresh}>Try again</CustomButton>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.screen}>
       {mapView ? (
         <View style={styles.mapScreen}>
-          <FlatListHeader mapView onSetListView={() => setMapView(false)} resultsTotal={flats.length} />
+          <FlatListHeader
+            mapView
+            onSetListView={() => setMapView(false)}
+            resultsTotal={flats.length}
+          />
           <View style={styles.mapContainer}>
             <CustomMapView navigation={navigation} />
           </View>
@@ -93,16 +123,11 @@ const FlatsScreen = ({ navigation }) => {
             data={sortedFlats}
             keyExtractor={(item) => item.id}
             contentContainerStyle={{ width: '100%', alignItems: 'center' }}
-            renderItem={({ item }) => (
-              <FlatItem item={item} navigation={navigation} />
-            )}
-            ListEmptyComponent={() => (
-              <ActivityIndicator
-                size='large'
-                color={Colours.accent}
-                style={{ marginVertical: 30 }}
-              />
-            )}
+            refreshing={isFetching}
+            onRefresh={handleRefresh}
+            renderItem={handleRenderItem}
+            initialNumToRender={3}
+            removeClippedSubviews={true}
             ListHeaderComponent={() => (
               <FlatListHeader
                 onOpenModal={() => setModalVisible(true)}
@@ -179,6 +204,10 @@ const styles = StyleSheet.create({
     fontSize: 21,
     marginBottom: 10,
   },
+  errorMsg: {
+    fontFamily: 'quicksand-bold',
+    fontSize: 20
+  }
 });
 
 export default FlatsScreen;
