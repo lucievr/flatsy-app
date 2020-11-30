@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
-import { TouchableOpacity, TouchableNativeFeedback, State, TapGestureHandler } from 'react-native-gesture-handler';
+import { View, StyleSheet, Platform, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 
-import ImageCarousel from './ImageCarousel';
+import ImageView from './ImageView';
 import DefaultText from './DefaultText';
 import DatesInfo from './DatesInfo';
 
@@ -15,30 +14,26 @@ const FlatItem = React.memo(({ item, navigation }) => {
     Touchable = TouchableNativeFeedback;
   }
 
-  const onSingleTap = (event) => {
-    if (event.nativeEvent.state === State.ACTIVE) {
+  const navigateToDetail = () => {
       // TODO pass only flatId and fetch item in detail page based on this id
       navigation.navigate('Detail', {
         screen: 'Detail',
         params: { item: item },
       });
-    }
   };
 
   return (
     <View style={styles.itemContainer}>
       <View style={styles.touchable}>
-        <Touchable useForeground>
+        <Touchable useForeground onPress={navigateToDetail}>
           <View>
-            <ImageCarousel item={item} images={images} navigation={navigation} touchable />
-            <TapGestureHandler onHandlerStateChange={onSingleTap}>
+            <ImageView images={images} touchable />
             <View style={styles.flatInfo}>
               <View style={styles.priceInfo}><DefaultText style={styles.price}>{price} €</DefaultText><DefaultText style={styles.perMonth}>/month</DefaultText></View>
               <DefaultText style={styles.flatType}>{roomNr} bedroom flat</DefaultText>
               <DefaultText style={styles.address}>{address}</DefaultText>
               <DatesInfo dateAdded={dateAdded} dateAvailable={dateAvailable} />
             </View>
-            </TapGestureHandler>
           </View>
         </Touchable>
       </View>

@@ -2,8 +2,7 @@ import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 
 import DefaultText from '../components/DefaultText';
-import CustomButton from '../components/CustomButton';
-import ImageCarousel from '../components/ImageCarousel';
+import ImageView from '../components/ImageView';
 import DatesInfo from '../components/DatesInfo';
 import BedIcon from '../assets/images/BedIcon';
 import BathIcon from '../assets/images/BathIcon';
@@ -23,9 +22,9 @@ const FlatDetailScreen = ({ route }) => {
     <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.itemContainer}>
-          <ImageCarousel images={images} />
+          <ImageView images={images} imageCarousel />
           <View style={styles.flatInfo}>
-          <DatesInfo
+            <DatesInfo
               dateAdded={dateAdded}
               dateAvailable={dateAvailable}
               detailed
@@ -37,7 +36,7 @@ const FlatDetailScreen = ({ route }) => {
             <DefaultText style={styles.flatType}>
               {roomNr} bedroom flat
             </DefaultText>
-                        <DefaultText style={styles.address}>{address}</DefaultText>
+            <DefaultText style={styles.address}>{address}</DefaultText>
             <View style={styles.flatIcons}>
               <BedIcon />
               <DefaultText style={styles.iconText}>{roomNr}</DefaultText>
@@ -69,10 +68,10 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     backgroundColor: 'white',
     borderRadius: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   flatInfo: {
-    paddingTop: 10,
+    padding: 10,
   },
   priceInfo: {
     flexDirection: 'row',
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
   },
   flatIcons: {
     flexDirection: 'row',
-    paddingVertical: 8,
+    paddingTop: 8,
   },
   iconText: {
     paddingLeft: 10,
