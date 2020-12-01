@@ -23,10 +23,10 @@ const CustomMapView = ({ navigation }) => {
     setMapReady(true);
   }, [mapRef, setMapReady]);
 
-  const handleSeeDetail = (item) => {
+  const handleSeeDetail = (id) => {
     navigation.navigate('Detail', {
       screen: 'Detail',
-      params: { item: item },
+      params: { flatId: id },
     });
   };
 
@@ -50,7 +50,7 @@ const CustomMapView = ({ navigation }) => {
           }}
         >
           <PinIcon />
-          <Callout style={styles.callout} onPress={() => handleSeeDetail(flat)}>
+          <Callout style={styles.callout} onPress={() => handleSeeDetail(flat.id)}>
             <View style={{ flex: 1, marginLeft: 5 }}>
               <DefaultText>
                 {flat.roomNr} bedroom flat

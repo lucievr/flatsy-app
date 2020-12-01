@@ -127,7 +127,6 @@ const FlatsScreen = ({ navigation }) => {
             onRefresh={handleRefresh}
             renderItem={handleRenderItem}
             initialNumToRender={3}
-            removeClippedSubviews={true}
             ListHeaderComponent={() => (
               <FlatListHeader
                 onOpenModal={() => setModalVisible(true)}

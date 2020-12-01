@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import DefaultText from '../components/DefaultText';
 import ImageView from '../components/ImageView';
@@ -9,6 +10,12 @@ import BedIcon from '../assets/images/BedIcon';
 import BathIcon from '../assets/images/BathIcon';
 
 const FlatDetailScreen = ({ route }) => {
+  const flatId = route.params.flatId;
+
+  const selectedFlat = useSelector(state =>
+    state.flats.flats.find(flat => flat.id === flatId)
+  );
+
   const {
     images,
     dateAdded,
@@ -18,7 +25,7 @@ const FlatDetailScreen = ({ route }) => {
     bathNr,
     address,
     coords,
-  } = route.params.item;
+  } = selectedFlat;
 
   return (
     <View style={styles.screen}>

@@ -6,7 +6,7 @@ import DefaultText from './DefaultText';
 import DatesInfo from './DatesInfo';
 
 const FlatItem = React.memo(({ item, navigation }) => {
-  const { images, price, roomNr, address, dateAdded, dateAvailable } = item;
+  const { id, images, price, roomNr, address, dateAdded, dateAvailable } = item;
 
   let Touchable = TouchableOpacity;
 
@@ -15,10 +15,9 @@ const FlatItem = React.memo(({ item, navigation }) => {
   }
 
   const navigateToDetail = () => {
-      // TODO pass only flatId and fetch item in detail page based on this id
       navigation.navigate('Detail', {
         screen: 'Detail',
-        params: { item: item },
+        params: { flatId: id },
       });
   };
 
