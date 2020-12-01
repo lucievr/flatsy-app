@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 
+import CameraIcon from '../assets/images/CameraIcon';
+
 const ImageView = ({ images, imageCarousel }) => {
   if (imageCarousel) {
     return (
@@ -31,6 +33,9 @@ const ImageView = ({ images, imageCarousel }) => {
           <Image style={styles.image} source={{ uri: images[0] }} />
           <View style={styles.imgCount}>
             <Text style={styles.countText}>{images.length}</Text>
+            <View style={styles.iconContainer}>
+              <CameraIcon />
+            </View>
           </View>
         </View>
       </View>
@@ -59,16 +64,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(64,64,64,0.8)',
     paddingTop: 2,
     paddingBottom: 5,
-    paddingHorizontal: 6,
+    paddingLeft: 7,
+    paddingRight: 4,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    flexDirection: 'row',
   },
   countText: {
     color: 'white',
     fontSize: 17,
     fontFamily: 'quicksand-semibold',
+    marginRight: 3,
+  },
+  iconContainer: {
+    marginTop: 4,
+    marginRight: 3,
   },
 });
 
