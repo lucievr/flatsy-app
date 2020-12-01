@@ -4,6 +4,7 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 import DefaultText from '../components/DefaultText';
 import ImageView from '../components/ImageView';
 import DatesInfo from '../components/DatesInfo';
+import MapDetail from '../components/MapDetail';
 import BedIcon from '../assets/images/BedIcon';
 import BathIcon from '../assets/images/BathIcon';
 
@@ -16,6 +17,7 @@ const FlatDetailScreen = ({ route }) => {
     roomNr,
     bathNr,
     address,
+    coords,
   } = route.params.item;
 
   return (
@@ -44,6 +46,7 @@ const FlatDetailScreen = ({ route }) => {
               <DefaultText style={styles.iconText}>{bathNr}</DefaultText>
             </View>
           </View>
+          <MapDetail coords={coords} />  
         </View>
       </ScrollView>
     </View>
