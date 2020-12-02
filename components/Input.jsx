@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   label: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: 'quicksand-semibold',
     marginVertical: 8
   },
   input: {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   errorText: {
-    fontFamily: 'open-sans',
+    fontFamily: 'quicksand',
     color: 'red',
     fontSize: 13
   }
