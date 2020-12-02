@@ -6,7 +6,6 @@ import {
   Modal,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ActivityIndicator,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,7 +16,6 @@ import DefaultText from '../components/DefaultText';
 import CustomRadioButton from '../components/CustomRadioButton';
 import CustomButton from '../components/CustomButton';
 import CustomMapView from '../components/MapView';
-import Colours from '../constants/colours';
 
 const sortOptions = [
   {

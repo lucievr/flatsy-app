@@ -10,7 +10,7 @@ import {
 import Colours from '../constants/colours';
 
 const CustomButton = (props) => {
-  let ButtonComponent = TouchableOpacity; // for iOS
+  let ButtonComponent = TouchableOpacity;
 
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     ButtonComponent = TouchableNativeFeedback;
