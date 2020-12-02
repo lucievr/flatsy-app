@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -93,11 +93,11 @@ const ContactScreen = ({ navigation }) => {
             required: { value: true, message: 'Phone number is required' },
             minLength: {
               value: 6,
-              message: 'Minimum 6 digits'
+              message: 'Minimum 6 digits',
             },
             maxLength: {
               value: 14,
-              message: 'Maximum 14 digits'
+              message: 'Maximum 14 digits',
             },
           }}
           defaultValue=''
@@ -130,7 +130,7 @@ const ContactScreen = ({ navigation }) => {
             },
             maxLength: {
               value: 200,
-              message: 'Maximum 200 characters'
+              message: 'Maximum 200 characters',
             },
           }}
           defaultValue=''
@@ -144,27 +144,19 @@ const ContactScreen = ({ navigation }) => {
             style={{ marginVertical: 30 }}
           />
         ) : (
-
-          <CustomButton
-            style={{ width: '100%', marginTop: 30}}
-            onPress={handleSubmit(onSubmit)}
-          >
-          <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'center'}}>
-          <SendIcon />
-            <DefaultText style={styles.buttonText}>Send message</DefaultText>
-          </View>
+          <CustomButton style={styles.button} onPress={handleSubmit(onSubmit)}>
+            <View style={styles.buttonContent}>
+              <SendIcon />
+              <DefaultText style={styles.buttonText}>Send message</DefaultText>
+            </View>
           </CustomButton>
         )}
 
-        <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-      >
-      <View style={styles.modalView}>
-      <DefaultText>Message sent</DefaultText>
-      </View>
-      </Modal>
+        <Modal animationType='slide' transparent={true} visible={modalVisible}>
+          <View style={styles.modalView}>
+            <DefaultText>Message sent</DefaultText>
+          </View>
+        </Modal>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -191,10 +183,19 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     flex: 1,
   },
+  button: {
+    width: '100%',
+    marginTop: 30,
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
   buttonText: {
     fontSize: 22,
-    marginLeft: 10
-  }, 
+    marginLeft: 10,
+  },
   modalView: {
     marginTop: 20,
     justifyContent: 'center',
@@ -202,8 +203,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colours.accent,
     marginHorizontal: 20,
     padding: 10,
-    borderRadius: 10
-  }
+    borderRadius: 10,
+  },
 });
 
 export default ContactScreen;

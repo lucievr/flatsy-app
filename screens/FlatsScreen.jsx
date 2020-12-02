@@ -52,9 +52,13 @@ const FlatsScreen = ({ navigation }) => {
   const sortFlats = () => {
     switch (sortValue) {
       case 0:
-        return setSortedFlats([...flats.sort((a, b) => a.dateAdded - b.dateAdded)]);
+        return setSortedFlats([
+          ...flats.sort((a, b) => a.dateAdded - b.dateAdded),
+        ]);
       case 1:
-        return setSortedFlats([...flats.sort((a, b) => b.dateAdded - a.dateAdded)]);
+        return setSortedFlats([
+          ...flats.sort((a, b) => b.dateAdded - a.dateAdded),
+        ]);
       case 2:
         return setSortedFlats([...flats.sort((a, b) => a.price - b.price)]);
       case 3:
@@ -75,9 +79,9 @@ const FlatsScreen = ({ navigation }) => {
     dispatch(fetchFlatsStartAsync());
   };
 
-  const handleRenderItem = ({item}) => {
+  const handleRenderItem = ({ item }) => {
     return <FlatItem item={item} navigation={navigation} />;
-  }
+  };
 
   useEffect(() => {
     sortFlats();
@@ -91,10 +95,8 @@ const FlatsScreen = ({ navigation }) => {
     return (
       <View style={styles.screen}>
         <View style={styles.mapScreen}>
-          <FlatListHeader
-            resultsTotal={flats.length || 0}
-          />
-          <View style={{ width: '100%', justifyContent: 'space-evenly', alignItems: 'center', flex: 1}}>
+          <FlatListHeader resultsTotal={flats.length || 0} />
+          <View style={styles.errorContainer}>
             <DefaultText style={styles.errorMsg}>An Error Ocurred!</DefaultText>
             <DefaultText>{errorMessage}</DefaultText>
             <CustomButton onPress={handleRefresh}>Try again</CustomButton>
@@ -122,7 +124,7 @@ const FlatsScreen = ({ navigation }) => {
           <FlatList
             data={sortedFlats}
             keyExtractor={(item) => item.id}
-            contentContainerStyle={{ width: '100%', alignItems: 'center' }}
+            contentContainerStyle={styles.flatlist}
             refreshing={isFetching}
             onRefresh={handleRefresh}
             renderItem={handleRenderItem}
@@ -186,6 +188,7 @@ const styles = StyleSheet.create({
     height: '81%',
     alignItems: 'center',
   },
+  flatlist: { width: '100%', alignItems: 'center' },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -203,10 +206,16 @@ const styles = StyleSheet.create({
     fontSize: 21,
     marginBottom: 10,
   },
+  errorContainer: {
+    width: '100%',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flex: 1,
+  },
   errorMsg: {
     fontFamily: 'quicksand-bold',
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });
 
 export default FlatsScreen;

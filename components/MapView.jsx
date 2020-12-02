@@ -50,11 +50,12 @@ const CustomMapView = ({ navigation }) => {
           }}
         >
           <PinIcon />
-          <Callout style={styles.callout} onPress={() => handleSeeDetail(flat.id)}>
-            <View style={{ flex: 1, marginLeft: 5 }}>
-              <DefaultText>
-                {flat.roomNr} bedroom flat
-              </DefaultText>
+          <Callout
+            style={styles.callout}
+            onPress={() => handleSeeDetail(flat.id)}
+          >
+            <View style={styles.calloutContent}>
+              <DefaultText>{flat.roomNr} bedroom flat</DefaultText>
               <View style={styles.priceInfo}>
                 <DefaultText style={styles.price}>{flat.price} €</DefaultText>
                 <DefaultText style={styles.perMonth}>/month</DefaultText>
@@ -84,10 +85,9 @@ const styles = StyleSheet.create({
     height: 100,
     paddingVertical: 5,
   },
-  image: {
-    width: 120,
-    height: 90,
-    resizeMode: 'cover',
+  calloutContent: {
+    flex: 1,
+    marginLeft: 5,
   },
   priceInfo: {
     flexDirection: 'row',

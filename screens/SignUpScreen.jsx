@@ -175,10 +175,7 @@ const SignUpScreen = ({ navigation }) => {
             style={{ marginVertical: 30 }}
           />
         ) : (
-          <CustomButton
-            style={{ width: '100%', marginTop: 30 }}
-            onPress={handleSubmit(onSubmit)}
-          >
+          <CustomButton style={styles.button} onPress={handleSubmit(onSubmit)}>
             Sign up
           </CustomButton>
         )}
@@ -215,6 +212,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingRight: 10,
     alignItems: 'center',
+  },
+  button: {
+    width: '100%',
+    marginTop: 30,
   },
 });
 
