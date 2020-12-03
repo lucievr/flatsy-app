@@ -21,15 +21,25 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "dev.lucie.flatsy",
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "buildNumber": "1.0.0",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBWWYhjYkDswMFmiV5qZiN4ANzHSPLTAWs"
+      }
     },
     "android": {
       "package": "dev.lucie.flatsy",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon-adaptive.png"
       },
       "permissions": [],
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyC2CljNb7aF1YV2knLW8rhtP3oQKD9oQrI"
+        }
+      }
     }
   }
 }

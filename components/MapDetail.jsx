@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import PinIcon from '../assets/images/PinIcon';
 
@@ -26,6 +26,7 @@ const MapDetail = ({ coords }) => {
       onMapReady={handleMapReady}
       initialRegion={mapRegion}
       onRegionChange={(region) => setMapRegion(region)}
+      provider={PROVIDER_GOOGLE}
       zoomControlEnabled
       zoomTapEnabled
       zoomEnabled
