@@ -7,7 +7,7 @@
     "privacy": "public",
     "sdkVersion": "39.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +21,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "dev.lucie.flatsy",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "googleServicesFile": "./GoogleService-Info.plist",
       "config": {
         "googleMapsApiKey": "AIzaSyBWWYhjYkDswMFmiV5qZiN4ANzHSPLTAWs"
@@ -29,7 +29,7 @@
     },
     "android": {
       "package": "dev.lucie.flatsy",
-      "versionCode": 1,
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon-adaptive.png"
       },
